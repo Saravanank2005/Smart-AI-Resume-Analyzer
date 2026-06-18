@@ -22,4 +22,5 @@ jobs:
           git remote add hf https://huggingface.co/spaces/Sarn007/AI_Resume_Analyzer
           git config --global user.email "actions@github.com"
           git config --global user.name "GitHub Actions"
-          git push --force https://Sarn007:$HF_TOKEN@huggingface.co/spaces/Sarn007/AI_Resume_Analyzer main
+          # Pushing HEAD:main ensures it works even in detached HEAD state
+          git push --force https://Sarn007:$HF_TOKEN@huggingface.co/spaces/Sarn007/AI_Resume_Analyzer HEAD:main
