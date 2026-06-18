@@ -507,16 +507,19 @@ button.primary:hover {
 }
 
 /* Close Button ──────────────────────────────────────────────────────────── */
-#close-chat-btn {
-    background: rgba(255,255,255,0.08) !important;
-    border: 1px solid rgba(255,255,255,0.12) !important;
-    color: rgba(255,255,255,0.7) !important;
+#close-chat-btn, #close-chat-btn button {
+    background: rgba(255,255,255,0.1) !important;
+    border: 1px solid rgba(255,255,255,0.2) !important;
+    color: #ffffff !important;
     font-size: 13px !important;
-    font-weight: 600 !important;
+    font-weight: 700 !important;
     cursor: pointer !important;
     width: 28px !important;
     height: 28px !important;
     min-width: 28px !important;
+    max-width: 28px !important;
+    min-height: 28px !important;
+    max-height: 28px !important;
     border-radius: 50% !important;
     padding: 0 !important;
     box-shadow: none !important;
@@ -525,11 +528,12 @@ button.primary:hover {
     justify-content: center !important;
     transition: all 0.2s ease !important;
     line-height: 1 !important;
+    flex: 0 0 auto !important;
 }
-#close-chat-btn:hover {
-    background: rgba(239, 68, 68, 0.25) !important;
-    border-color: rgba(239,68,68,0.4) !important;
-    color: #fca5a5 !important;
+#close-chat-btn:hover, #close-chat-btn button:hover {
+    background: rgba(239, 68, 68, 0.8) !important;
+    border-color: rgba(239,68,68,0.9) !important;
+    color: #ffffff !important;
     transform: scale(1.05) !important;
 }
 
@@ -719,20 +723,24 @@ div[class*="file-card"],
 .dark .file-preview,
 .dark .file-card,
 .dark [data-testid="file-preview"] {
-    background: rgba(255, 255, 255, 0.85) !important;
-    background-color: rgba(255, 255, 255, 0.85) !important;
-    border: 1px solid rgba(99, 102, 241, 0.15) !important;
+    background: #ffffff !important;
+    background-color: #ffffff !important;
+    border: 1.5px solid rgba(99, 102, 241, 0.15) !important;
     border-radius: 12px !important;
-    color: #1e293b !important;
-    box-shadow: 0 2px 8px rgba(99, 102, 241, 0.02) !important;
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.05) !important;
 }
-.file-name,
-[class*="file-name"],
+.file-preview *,
+.file-card *,
+[data-testid="file-preview"] *,
 [class*="file-card"] *,
 [class*="file-preview"] *,
+.file-name,
+[class*="file-name"],
 .dark .file-name,
 .dark [class*="file-name"] {
-    color: #1e293b !important;
+    background: transparent !important;
+    background-color: transparent !important;
+    color: #4f46e5 !important;
     font-weight: 600 !important;
     font-family: 'Plus Jakarta Sans', sans-serif !important;
 }
@@ -908,7 +916,7 @@ with gr.Blocks(title="NaanChalant AI — Resume ATS Analyzer") as demo:
                 )
 
                 with gr.Tabs(elem_id="result-tabs"):
-                    with gr.Tab("Skills &amp; Keywords"):
+                    with gr.Tab("Skills & Keywords"):
                         gr.HTML(f"<div style='padding:6px 0 8px;'>"
                                 f"{icon('check-circle',14,'#10b981','margin-right:5px;')}"
                                 f"<strong style='font-size:0.85rem;color:#047857;'>Matching Skills</strong></div>")
