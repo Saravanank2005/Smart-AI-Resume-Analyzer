@@ -1,0 +1,29 @@
+Role: Product Manager
+Category: Product Management
+
+Core Skills:
+- Product Strategy & Vision: Defining product roadmaps, market analysis, competitor analysis, business models
+- Methodology: Agile, Scrum, Kanban, User Story mapping, PRDs (Product Requirement Documents)
+- Analytics & Metrics: North Star Metric, KPI definition, SQL, Amplitude, Mixpanel, Google Analytics
+- User Focus: User research, customer interviewing, persona definition, wireframing, usability testing
+- Leadership & Communication: Stakeholder alignment, cross-functional collaboration, prioritization (RICE, MoSCoW)
+
+Key Responsibilities:
+- Define the product vision, strategy, and roadmap based on market opportunities and user feedback.
+- Write detailed PRDs, user stories, and acceptance criteria for engineering and design teams.
+- Prioritize features and balance technical debt, user requests, and business goals.
+- Collaborate closely with engineers, designers, marketing, and sales to launch high-quality products.
+- Analyze post-launch product metrics and user behavior to iterate and improve the product.
+
+Standard Tools & Technologies:
+- Management: Jira, Confluence, Asana, Monday.com
+- Analytics: Amplitude, Mixpanel, SQL, Google Analytics
+- Design/Wireframing: Figma, Balsamiq, Miro
+- Roadmap: Productboard, Roadmunk
+
+Typical Interview Focus Areas:
+- Product Design (improving a favorite product, designing a product for a specific niche)
+- Product Strategy (market entry, monetization, response to competitor moves)
+- Analytics & Metrics (troubleshooting a declining metric, choosing launch metrics)
+- Prioritization & Trade-offs (handling conflicting priorities from engineering vs sales)
+- Behavioral & Leadership (handling failure, managing difficult stakeholders, cross-functional influence)

@@ -1,0 +1,30 @@
+Role: Fullstack Developer
+Category: Engineering
+
+Core Skills:
+- Frontend Core: HTML5, CSS3, JavaScript (ES6+), TypeScript
+- Frontend Frameworks: React, Vue.js, Next.js, Angular
+- Backend Runtimes/Frameworks: Node.js (Express, NestJS), Python (Django, FastAPI, Flask), Java (Spring Boot)
+- State Management: Redux, Context API, Zustand, Pinia
+- Database & ORM: PostgreSQL, MongoDB, Redis, Sequelize, Prisma
+- APIs: RESTful APIs, GraphQL, WebSockets, gRPC
+
+Key Responsibilities:
+- Develop end-to-end web applications, writing clean frontend and backend code.
+- Design responsive user interfaces and manage client-side application state.
+- Create and maintain RESTful or GraphQL API endpoints, services, and middlewares.
+- Design, optimize, and maintain database schemas, models, and queries.
+- Optimize web performance, search engine optimization (SEO), and cross-browser compatibility.
+
+Standard Tools & Technologies:
+- Frontend: Tailwind CSS, SASS, Webpack, Vite
+- Testing: Jest, Cypress, React Testing Library
+- Version Control: Git, GitHub
+- Deployment: Docker, Vercel, Netlify, AWS
+
+Typical Interview Focus Areas:
+- Frontend engineering (DOM manipulation, event loop, closure, performance optimization like lazy loading)
+- API design and Integration (handling request limits, authentication JWT/OAuth, error payloads)
+- Database schema design (indexing, normalization, handling relational vs document databases)
+- System design for web applications (caching, load balancing, real-time messaging using websockets)
+- Coding challenges (creating UI components in React, resolving API payload bottlenecks)

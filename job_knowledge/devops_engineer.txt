@@ -1,0 +1,32 @@
+Role: DevOps / Cloud Engineer
+Category: Infrastructure / Cloud
+
+Core Skills:
+- Infrastructure as Code (IaC): Terraform, CloudFormation, Ansible
+- Containerization & Orchestration: Docker, Kubernetes, Helm
+- CI/CD Pipelines: Jenkins, GitHub Actions, GitLab CI, ArgoCD
+- Cloud Providers: AWS (EC2, S3, RDS, VPC, IAM, EKS), Azure, GCP
+- Scripting & Automation: Bash, Python, Go
+- Monitoring & Observability: Prometheus, Grafana, ELK/PLG Stack, Datadog
+- Linux & Networking: OS administration, TCP/IP, DNS, SSL/TLS, Load Balancers, Firewalls
+
+Key Responsibilities:
+- Build, optimize, and maintain secure and automated CI/CD deployment pipelines.
+- Manage and scale cloud infrastructure using Infrastructure as Code (IaC) templates.
+- Monitor system health, performance, and security, and troubleshoot infrastructure issues.
+- Define containerization and orchestration strategies for microservices.
+- Ensure high availability, disaster recovery, and cost efficiency of cloud resources.
+
+Standard Tools & Technologies:
+- IaC: Terraform, Ansible, Pulumi
+- Orchestration: Kubernetes, Docker Swarm
+- CI/CD: GitHub Actions, GitLab CI, Jenkins, Spinnaker
+- Logging/Monitoring: Prometheus, Grafana, ELK, Jaeger
+- Cloud: AWS, Google Cloud, Azure
+
+Typical Interview Focus Areas:
+- Troubleshooting scenarios (e.g., website down, database connection timeout, high CPU usage)
+- CI/CD pipeline design and security (handling secrets, caching dependencies, rollback strategies)
+- Kubernetes architecture (pods, services, ingresses, controllers, configmaps, persistent volumes)
+- Infrastructure as Code best practices (state management, modules, drift detection)
+- Networking and cloud security (VPC design, subnetting, security groups, IAM roles)

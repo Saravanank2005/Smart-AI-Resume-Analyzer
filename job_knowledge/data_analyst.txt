@@ -1,0 +1,28 @@
+Role: Data Analyst
+Category: Analytics
+
+Core Skills:
+- Querying & Manipulation: Advanced SQL (joins, subqueries, CTEs, window functions, query optimization)
+- Programming: Python (pandas, numpy, matplotlib, seaborn), R
+- Data Visualization & BI: Tableau, Power BI, Looker Studio
+- Spreadsheets: Advanced Excel (VLOOKUP, Pivot Tables, VBA, array formulas)
+- Statistics: Descriptive statistics, correlation, regression analysis, distributions
+
+Key Responsibilities:
+- Extract, clean, and analyze data from multiple operational databases and data warehouses.
+- Build and maintain interactive BI dashboards and reporting tools for business metrics.
+- Translate business questions into data analysis projects and compile report summaries.
+- Perform exploratory analyses to identify trends, business opportunities, and operational inefficiencies.
+- Present insights and data findings to business unit leaders to drive decision-making.
+
+Standard Tools & Technologies:
+- SQL Dialects: PostgreSQL, MySQL, BigQuery, Snowflake, Redshift
+- BI Tools: Tableau Desktop & Server, Power BI Desktop, Looker
+- Productivity: Excel, Google Sheets, Jupyter Notebooks
+
+Typical Interview Focus Areas:
+- Advanced SQL exercises (calculating MoM growth, active users, cohort analysis, rolling averages)
+- Data visualization principles (choosing the right chart, dashboard user flow, metric design)
+- Data cleaning scenarios (handling duplicates, missing values, date format mismatches)
+- Analytics Case Studies (defining KPIs, analyzing business drops, funnel conversions)
+- Basic statistics concepts (mean, median, standard deviation, outliers, normal distribution)

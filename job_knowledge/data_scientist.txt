@@ -1,0 +1,29 @@
+Role: Data Scientist
+Category: Analytics / AI
+
+Core Skills:
+- Mathematics & Statistics: Probability, Hypothesis Testing, Regression, Linear Algebra, Bayesian Inference
+- Machine Learning: Supervised Learning (Trees, Boosting, SVM), Unsupervised Learning (Clustering, PCA), Deep Learning, NLP
+- Programming: Python (pandas, numpy, scikit-learn, SciPy, TensorFlow, PyTorch), R
+- Data manipulation & Querying: SQL, Spark, PySpark, Hadoop
+- Data Visualization: matplotlib, seaborn, Tableau, PowerBI
+
+Key Responsibilities:
+- Formulate business problems as machine learning tasks and design, build, and deploy predictive models.
+- Perform exploratory data analysis (EDA) to discover patterns and extract actionable insights.
+- Clean and preprocess raw data from various structured and unstructured data sources.
+- Conduct A/B testing and statistical analyses to measure product/feature performance.
+- Communicate technical results, insights, and model performances to non-technical stakeholders.
+
+Standard Tools & Technologies:
+- Data Tools: Jupyter Notebooks, Databricks, Snowflake
+- ML Operations (MLOps): MLflow, DVC, SageMaker, Docker
+- Cloud Platforms: AWS, GCP, Azure
+- Visualization: Tableau, Looker, Streamlit
+
+Typical Interview Focus Areas:
+- Machine Learning algorithms (intuition, mathematical foundations, trade-offs, regularization)
+- Probability & Statistics (p-values, confidence intervals, Bayes' theorem, distribution characteristics)
+- Coding & SQL (data cleaning, aggregations, window functions, pandas transformations)
+- Model evaluation metrics (ROC-AUC, Precision-Recall, F1-score, MAE/RMSE)
+- Product sense & Case studies (designing metrics, A/B testing setup, feature engineering strategies)

@@ -1,0 +1,29 @@
+Role: UI/UX Designer
+Category: Design
+
+Core Skills:
+- UI Design: Visual design, typography, color theory, layout, responsive grid systems, icon design
+- UX Design: User research, user personas, journey mapping, wireframing, information architecture, site mapping
+- Prototyping: Interactive prototypes, micro-interactions, high-fidelity mockups, user testing
+- Design Systems: Creating component libraries, UI kits, token management, design patterns
+- Collaboration: Developer handoff, feedback loops, workshop facilitation, usability audits
+
+Key Responsibilities:
+- Design intuitive and visually appealing user interfaces for web and mobile applications.
+- Conduct user research, user interviews, and translate insights into wireframes and user flows.
+- Create and test high-fidelity interactive prototypes with real users.
+- Establish, maintain, and scale the company's product design system and components.
+- Collaborate with product managers and engineers to ensure high-fidelity design implementation.
+
+Standard Tools & Technologies:
+- Design & Prototyping: Figma, Adobe XD, Sketch, Principle
+- User Research: Hotjar, Maze, UsabilityHub, Typeform
+- Handoff & Spec: Zeplin, Figma Handoff Modals
+- Whiteboarding: Miro, FigJam
+
+Typical Interview Focus Areas:
+- Portfolio review (explaining design decisions, user research findings, iteration history, metrics)
+- Design challenge (solving a user experience problem, whiteboarding a user flow)
+- Design systems & components (auto-layout, variant management in Figma, token scaling)
+- Collaboration with developers (handling constraints, giving feedback on built interfaces)
+- UX case study details (problem statements, user testing feedback, analytics validations)

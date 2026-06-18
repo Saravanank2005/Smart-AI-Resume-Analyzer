@@ -1,0 +1,29 @@
+Role: Software Engineer
+Category: Engineering
+
+Core Skills:
+- Programming Languages: Python, Java, C++, Go, Rust
+- Computer Science Fundamentals: Data Structures, Algorithms, Complexity Analysis (Big O), Object-Oriented Design
+- Software Engineering Principles: Clean Code, Design Patterns, SOLID, Code Reviews, Refactoring
+- Systems: Linux, OS Concepts, Memory Management, Multithreading, Concurrency
+- Testing: Unit Testing (pytest, JUnit), Integration Testing, TDD, Mocking
+
+Key Responsibilities:
+- Design, develop, test, deploy, and maintain robust and scalable software applications.
+- Collaborate with product managers, QA, and other engineers to define requirements and design specifications.
+- Write clean, maintainable, and well-documented code.
+- Optimize software applications for maximum speed, scalability, and resource utilization.
+- Debug complex production issues and implement reliable fixes.
+
+Standard Tools & Technologies:
+- Version Control: Git, GitHub, GitLab
+- Build & CI/CD: Maven, Gradle, GitHub Actions, Jenkins
+- Containers & Cloud: Docker, Kubernetes, AWS, GCP
+- Databases: PostgreSQL, MySQL, Redis
+
+Typical Interview Focus Areas:
+- Algorithmic problem-solving (Arrays, Trees, Graphs, Dynamic Programming)
+- System Design (scalability, microservices, load balancing, caching, database indexing)
+- Object-oriented design and design patterns
+- Concurrency, multi-threading, and resource management
+- Behavioral questions on engineering challenges, conflict resolution, and code quality standards

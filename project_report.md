@@ -1,12 +1,14 @@
-# 🔮 Technical Project Report: NaanChalant AI Resume ATS Analyzer
-**A Semantic ATS Recruiter and Resume Optimization Consultant Powered by Google Gemini API**
+# 🔮 Technical Project Report: NaanChalant AI Resume ATS Analyzer (Hugging Face RAG Edition)
+**A Semantic ATS Recruiter and Resume Optimization Consultant Powered by Hugging Face Serverless Inference API**
 
 ---
 
 ## 1. Executive Summary
-**NaanChalant AI Resume ATS Analyzer** is a premium, split-dashboard web application designed to evaluate, score, and optimize professional resumes against specific job description requirements. The system parses uploaded resumes in multiple formats (PDF, DOCX, TXT), uses the Google Gemini API to analyze compatibility, extracts skill gaps, performs keyword analysis, highlights structural/formatting flaws, and provides actionable recommendations.
+**NaanChalant AI Resume ATS Analyzer** is a premium, split-dashboard web application designed to evaluate, score, and optimize professional resumes against targeted job roles and specific job descriptions. The system parses uploaded resumes in multiple formats (PDF, DOCX, TXT) and queries a localized **ChromaDB** index containing curated job-skill knowledge documents to retrieve the requirements of the specified job role.
 
-Additionally, a collapsible right-hand **Resume Coach Chatbot** acts as an interactive consultant. It utilizes semantic RAG (backed by a client-side **ChromaDB** index containing resume-writing templates/best practices) alongside the parsed resume context, allowing users to ask for real-time improvements, STAR-method bullet points, and key modifications.
+It then leverages state-of-the-art open-source LLMs hosted on Hugging Face (such as `Qwen/Qwen2.5-72B-Instruct` or `Meta-Llama-3-8B-Instruct`) to calculate ATS compatibility scores, detect skill gaps, analyze keywords, identify formatting issues, output actionable edit suggestions, and generate tailored, role-specific technical and behavioral interview questions.
+
+Additionally, a collapsible right-hand **Resume Coach Chatbot** acts as an interactive career consultant. It utilizes semantic RAG alongside the parsed resume context, allowing users to ask for real-time improvements, STAR-method bullet points, and key modifications.
 
 ---
 
@@ -14,8 +16,8 @@ Additionally, a collapsible right-hand **Resume Coach Chatbot** acts as an inter
 
 The application is split into three core layers:
 1. **Resume Extraction & Document Ingestion**: Parses uploads locally using `pypdf` and `python-docx` for word/text structures.
-2. **ATS Comparison Engine**: Employs structural prompting using the Google Gemini API (`gemini-2.5-flash`) with structured JSON output configurations.
-3. **Interactive Optimization Coach (RAG)**: Integrates conversational memory, resume-specific system instructions, and local template retrieval from client-side vector database.
+2. **Job-Skill Knowledge Ingestion (RAG)**: Ingests structured job profiles at startup from the `job_knowledge` database, creating dense embeddings (384-dim, `all-MiniLM-L6-v2`) stored in an in-memory ChromaDB client.
+3. **Hugging Face ATS Evaluation Engine**: Employs structural prompting using the Hugging Face Inference API with a robust custom JSON extractor to process ATS scores, skill gaps, suggestions, and interview questions.
 
 ### A. High-Level Architecture
 The diagram below illustrates the block-level architecture of the system:
@@ -32,19 +34,19 @@ flowchart TB
 
     subgraph Evaluation [ATS Match Core]
         PDF & DOCX & TXT -->|Parsed Resume String| ATSEngine[analyze_resume_ats]
-        JD[(Target Job Description)] --> ATSEngine
-        ATSEngine -->|Gemini API JSON Mode| JSON[Compatibility JSON Schema]
+        Role[(Target Job Role)] -->|Semantic Query| Collection[(ChromaDB: 'echomind')]
+        Collection -->|Cosine Similarity RAG| Context[Retrieved Job Context]
+        Context --> ATSEngine
+        JD[(Extra Job Description)] --> ATSEngine
+        ATSEngine -->|Hugging Face Inference API| LLM[LLM Output Text]
+        LLM -->|Robust JSON Parser| JSON[Compatibility JSON Schema]
         JSON -->|Render Widgets| UI[Gradio Dashboard]
     end
 
     subgraph RAG [Interactive Coach]
         UI -->|Ask Rewrite Questions| Chatbot[Resume Coach Chat]
-        LocalNotes[(notes/*.txt templates)] -->|SentenceTransformer| Vectors[384-dim Embeddings]
-        Vectors -->|Retrieve| Collection[(ChromaDB: 'echomind')]
-        Collection -->|Cosine Similarity| Search[search_notes]
-        Search -->|Semantic Templates| Gemini[Gemini Conversational Client]
-        Chatbot -->|Pass Resume, JD & History| Gemini
-        Gemini -->|Optimization Advice| Chatbot
+        Chatbot -->|Pass Resume, Job Role & History| HFClient[HF Inference Client]
+        HFClient -->|Optimization Advice| Chatbot
     end
 
     %% Styles
@@ -52,8 +54,8 @@ flowchart TB
     classDef logic fill:#311042,stroke:#c084fc,stroke-width:2px,color:#f8fafc;
     classDef ui fill:#0f172a,stroke:#4f46e5,stroke-width:2px,color:#f8fafc;
 
-    class RawFile,LocalNotes,Collection storage;
-    class ATSEngine,Gemini logic;
+    class RawFile,Role,Collection,Context storage;
+    class ATSEngine,HFClient logic;
     class UI,Chatbot ui;
 ```
 
@@ -68,36 +70,37 @@ sequenceDiagram
     actor User as Applicant
     participant UI as Gradio Frontend (app.py)
     participant Core as RAG/ATS Core (rag_pipeline.py)
-    participant Gemini as Google Gemini API
+    participant HF as Hugging Face Hub API
 
-    User->>UI: Uploads Resume (PDF/DOCX) & enters JD
+    User->>UI: Uploads Resume, selects Target Role & enters extra JD details
     User->>UI: Clicks "Analyze Resume"
     
     activate UI
-    UI->>Core: Invokes perform_analysis(resume_file, required_skills)
+    UI->>Core: Invokes perform_analysis(resume_file, target_role, required_skills, token, model)
     activate Core
     Core->>Core: extract_resume_text() parses document stream
-    Core->>Gemini: analyze_resume_ats() sends JSON-configured prompt
-    activate Gemini
-    Gemini-->>Core: Returns JSON analysis (score, missing skills, recs, etc.)
-    deactivate Gemini
-    Core-->>UI: Returns score HTML, tag elements, and markdown lists
+    Core->>Core: search_notes(target_role) queries ChromaDB for job profile context
+    Core-->>Core: Retrieves relevant technical/soft skills & questions
+    Core->>HF: Sends prompt (Resume + Job Role + Retrieved Context + JD)
+    activate HF
+    HF-->>Core: Returns JSON-formatted compatibility text
+    deactivate HF
+    Core->>Core: extract_json() cleans and parses LLM text to dict
+    Core-->>UI: Returns score HTML, pills, suggestions, and interview questions
     deactivate Core
     
-    UI-->>User: Renders Score Gauge, Missing Skills tags, and Suggestions
-    Note over UI: Sets resume_text and required_skills states
+    UI-->>User: Renders Score Gauge, badges, recommendations, and custom interview questions
+    Note over UI: Sets resume_text, target_role, and required_skills states
     deactivate UI
 
-    User->>UI: Asks chatbot: "Write a bullet point for Python"
+    User->>UI: Asks chatbot: "How can I rewrite my Docker bullet point?"
     activate UI
-    UI->>Core: Invokes chat_response() with states and message
-    activate Core
-    Core->>Gemini: Sends chat history + system instruction (with resume & JD context)
-    activate Gemini
-    Gemini-->>Core: Generates specific optimization advice
-    deactivate Gemini
+    UI->>Core: Invokes chat_response() with message and state context
+    Core->>HF: Sends chat history + system instruction (with resume & role context)
+    activate HF
+    HF-->>Core: Generates specific optimization advice
+    deactivate HF
     Core-->>UI: Returns chatbot reply
-    deactivate Core
     UI-->>User: Renders conversational answer in the right sidebar
     deactivate UI
 ```
@@ -105,7 +108,7 @@ sequenceDiagram
 ---
 
 ## 3. Database Schema & Vector Database Details
-The local templates database utilizes **ChromaDB** in-memory to store structured resume writing guidelines, power-verbs, and layout recommendations.
+The local templates and job profile database utilizes **ChromaDB** in-memory to store structured resume writing guidelines, power-verbs, and role-specific requirements.
 
 - **Collection Name**: `echomind`
 - **Embedding Model**: `all-MiniLM-L6-v2` (SentenceTransformer)
@@ -116,41 +119,43 @@ The local templates database utilizes **ChromaDB** in-memory to store structured
   - **Chunk Size**: 300 characters
   - **Chunk Overlap**: 50 characters
   - **Splitter**: LangChain's `RecursiveCharacterTextSplitter`
+- **Indexed Knowledge Files**:
+  - `software_engineer.txt`: Fundamentals, languages, tools, and algorithms.
+  - `data_scientist.txt`: Mathematics, statistics, machine learning, and databases.
+  - `product_manager.txt`: Roadmaps, metrics, user research, and agile systems.
+  - `devops_engineer.txt`: CI/CD, Kubernetes, IaC (Terraform), and monitoring.
+  - `fullstack_developer.txt`: Next.js, React, Node.js, databases, and APIs.
+  - `data_analyst.txt`: Advanced SQL, Excel, reporting, and BI tools (Tableau/Power BI).
+  - `ui_ux_designer.txt`: Visual design, Figma, user testing, and components.
+  - `security_engineer.txt`: App security, OWASP, cryptography, and network scanning.
 
 ---
 
 ## 4. Key Logic & Code Walkthrough
 
-### A. Dynamic ATS Prompt Engineering & JSON Schema
-Gemini is configured in JSON mode to ensure the backend can reliably parse compatibility reports:
+### A. Hugging Face Prompt Engineering & JSON Schema
+Hugging Face models are instructed to return a structured JSON response matching the following schema:
 
-```python
-system_instruction = """You are an expert ATS (Applicant Tracking System) recruiter and resume optimization consultant.
-Analyze the user's resume text against the provided required skills / job description.
-Identify the match score, matching skills, missing skills, keyword gaps, and structural/formatting issues.
-Provide highly actionable recommendations on how they can edit their resume to match the requirements better.
-
-Return your response strictly as a JSON object with the following structure:
+```json
 {
-  "match_score": integer (0 to 100),
-  "matching_skills": list of strings,
-  "missing_skills": list of strings,
-  "keyword_analysis": string (brief summary of keyword match quality),
-  "formatting_issues": list of strings (structural flaws or formatting alerts),
-  "recommendations": list of strings (actionable edit suggestions to improve the resume match)
-}"""
+  "match_score": 85,
+  "matching_skills": ["Python", "Docker", "Git"],
+  "missing_skills": ["Kubernetes", "AWS EKS"],
+  "keyword_analysis": "Excellent coverage of backend development terms...",
+  "formatting_issues": ["Resume is missing a clear Summary section"],
+  "recommendations": ["Add a certification in AWS...", "Integrate projects highlighting Kubernetes"],
+  "interview_questions": [
+    "Q1 (Technical): You mentioned experience with Docker. How would you design a multi-stage Dockerfile to minimize image size?",
+    "Q2 (System Design): For a DevOps role, explain how you would manage secret storage in a Kubernetes cluster.",
+    "Q3 (Behavioral): Describe a time when a production deployment failed and how you troubleshot it."
+  ]
+}
 ```
 
-### B. Gradio 6.0 Custom Theme & Layout
-We applied a split layout with custom CSS to support beautiful gauges, color-coded tag pills, and clean collapsible sidebars:
+We implemented a robust extractor helper `extract_json()` that finds the first `{` and last `}` and cleans up unescaped newlines to ensure parsing does not fail if the model adds markdown wraps (e.g. ` ```json `).
 
-```css
-/* Custom CSS is used to inject: */
-/* - High-contrast dark greens/reds for matching/missing skills pills */
-/* - Soft light radial background gradient with subtle indigo/purple reflections */
-/* - Clean white container cards with drop shadows and minimal border highlights */
-/* - Legible slate color tokens for primary text and instructions */
-```
+### B. Custom Gradio UI Dashboard
+We adapted the layout to support a dropdown for the **Target Job Role** (configured to accept custom typing entries via `allow_custom_value=True`) and added an **Interview Prep** tab to render the custom questions dynamically. Additionally, users can paste their API tokens directly in the UI settings or leverage the `.env` configuration.
 
 ---
 
@@ -159,7 +164,7 @@ We applied a split layout with custom CSS to support beautiful gauges, color-cod
 ### A. Environment Configuration
 Create a `.env` file in the project root:
 ```env
-GEMINI_API_KEY=AIzaSy...
+HF_TOKEN=hf_YourHuggingFaceTokenHere
 ```
 
 ### B. Starting the Application
@@ -171,13 +176,3 @@ Open your browser and navigate to:
 ```
 http://localhost:7860
 ```
-
----
-
-## 6. Hybrid System Validation Results
-
-| Resume Upload Type | Target Skill/JD | Match Score | Key Route/Result |
-| :--- | :--- | :--- | :--- |
-| **Software Engineer PDF** | React, Python, Docker | **85%** | Successfully extracts text, identifies Docker is missing, and suggests Docker integration projects. |
-| **Business Analyst DOCX** | SQL, Tableau, Agile | **52%** | Flags missing Tableau skill and structural lack of metrics in the Experience section. |
-| **Sales Resume TXT** | Salesforce, CRM | **78%** | Lists Salesforce as matching, suggests CRM keywords to improve keyword density. |

@@ -1,0 +1,30 @@
+Role: Cybersecurity / Security Engineer
+Category: Security
+
+Core Skills:
+- Application Security: OWASP Top 10, static/dynamic code analysis (SAST/DAST), dependency checking
+- Network Security: Firewalls, VPNs, IDS/IPS, TLS configuration, network segmentation
+- Cryptography: Symmetric/Asymmetric encryption, hashing, key management, PKI
+- Threat Modeling: STRIDE, threat mapping, risk analysis
+- Incident Response: Log analysis, forensics, SIEM monitoring, vulnerability management
+- Compliance & Standards: ISO 27001, SOC 2, HIPAA, GDPR
+
+Key Responsibilities:
+- Conduct security reviews, vulnerability assessments, and threat modeling for new features and systems.
+- Build and implement security controls, automated scanners, and vulnerability patch systems.
+- Monitor application logs, network traffic, and system flags to detect and respond to security incidents.
+- Educate software engineers on secure coding guidelines and security best practices.
+- Conduct penetration tests and security audits across cloud infrastructure and internal tooling.
+
+Standard Tools & Technologies:
+- Security Scanners: Burp Suite, OWASP ZAP, Nmap, Wireshark, Nessus
+- Code Analysis: SonarQube, Snyk, GitHub Dependabot
+- SIEM & Logs: Splunk, Elastic Security, Datadog Security
+- Cloud Security: AWS IAM, AWS GuardDuty, Security Hub
+
+Typical Interview Focus Areas:
+- Explaining vulnerability mechanics (e.g., how SQL Injection, XSS, SSRF works and how to mitigate them)
+- Threat modeling exercise (identifying threats in a given system architecture)
+- Cryptographic fundamentals (when to use AES vs RSA, secure hashing algorithms like bcrypt/scrypt)
+- Incident response walkthrough (how to handle a suspected database breach or compromise)
+- Cloud IAM security design (applying the principle of least privilege, securing access keys)
