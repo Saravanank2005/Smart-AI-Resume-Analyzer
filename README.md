@@ -1,12 +1,4 @@
----
-title: Smart AI Resume Analyzer
-emoji: 🔮
-colorFrom: indigo
-colorTo: purple
-sdk: gradio
-app_file: app.py
-pinned: false
----
+
 
 # Smart AI Resume Analyzer & Career Coach
 
